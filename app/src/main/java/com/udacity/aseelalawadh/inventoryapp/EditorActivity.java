@@ -1,6 +1,7 @@
 package com.udacity.aseelalawadh.inventoryapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,9 @@ import com.udacity.aseelalawadh.inventoryapp.data.InventoryDBHelper;
 public class EditorActivity extends AppCompatActivity {
     private EditText mNameEditText;
     private EditText mPrice;
+    private EditText mQuantity;
+    private EditText mSupplierName;
+    private EditText mSupplierPhone;
     SQLiteDatabase db ;
 
     @Override
@@ -29,8 +33,12 @@ public class EditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editor);
 
         // Find all relevant views that we will need to read user input from
-        mNameEditText = (EditText) findViewById(R.id.edit_product_name);
-        mPrice = (EditText) findViewById(R.id.edit_product_price);
+        mNameEditText = findViewById(R.id.edit_product_name);
+        mPrice = findViewById(R.id.edit_product_price);
+        mQuantity = findViewById(R.id.edit_product_quantity);
+        mSupplierName = findViewById(R.id.edit_product_supplier_name);
+        mSupplierPhone = findViewById(R.id.edit_supplier_phone);
+
         //  mWeightEditText = (EditText) findViewById(R.id.edit_pet_weight);
 
     }
@@ -82,14 +90,19 @@ public class EditorActivity extends AppCompatActivity {
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
         String priceString = mPrice.getText().toString().trim();
+        String quantityString = mQuantity.getText().toString().trim();
+        String supplierNameString = mSupplierName.getText().toString().trim();
+        String supplierPhoneString = mSupplierPhone.getText().toString().trim();
+
        /* String weightString = mWeightEditText.getText().toString().trim();*/
         int price  = Integer.parseInt(priceString);
+        int quantity = Integer.parseInt(quantityString);
 
         // Create database helper
         InventoryDBHelper mDbHelper = new InventoryDBHelper(this);
 
         // Gets the database in write mode
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        db = mDbHelper.getWritableDatabase();
 
         // Create a ContentValues object where column names are the keys,
         // and pet attributes from the editor are the values.
@@ -100,6 +113,10 @@ public class EditorActivity extends AppCompatActivity {
         values.put(PetEntry.COLUMN_PET_WEIGHT, weight);*/
         values.put(InventoryEntry.COLUMN_INVENTORY_NAME, nameString);
         values.put(InventoryEntry.COLUMN_INVENTORY_PRICE, price);
+        values.put(InventoryEntry.COLUMN_INVENTORY_QUANTITY, quantity);
+        values.put(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME, supplierNameString);
+        values.put(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE, supplierPhoneString);
+
        /* values.put(InventoryContract.InventoryEntry.COLUMN_INVENTORY_QUANTITY, "Terrier");
         values.put(InventoryContract.InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME, "Terrier");
         values.put(InventoryContract.InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE, "Terrier");
@@ -115,9 +132,6 @@ public class EditorActivity extends AppCompatActivity {
             // Otherwise, the insertion was successful and we can display a toast with the row ID.
             Toast.makeText(this, "Product saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
         }
-    }
-    public void deletProduct(){
-        db.delete(InventoryEntry.TABLE_NAME,InventoryEntry._ID ,null);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -141,7 +155,6 @@ public class EditorActivity extends AppCompatActivity {
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
                 // Do nothing for now
-                deletProduct();
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:

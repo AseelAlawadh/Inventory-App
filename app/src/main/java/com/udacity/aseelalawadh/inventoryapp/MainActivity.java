@@ -54,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 InventoryEntry._ID,
                 InventoryEntry.COLUMN_INVENTORY_NAME,
                 InventoryEntry.COLUMN_INVENTORY_PRICE,
-              /*  InventoryEntry.COLUMN_INVENTORY_QUANTITY,
+               InventoryEntry.COLUMN_INVENTORY_QUANTITY,
                 InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME,
-                InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE*/
-        };
-        Cursor cursor = db.query(InventoryEntry.TABLE_NAME ,
+                InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE };
+
+        Cursor cursor = db.query(
+                InventoryEntry.TABLE_NAME ,
                 projection,
                 null,
                 null,
@@ -70,20 +71,19 @@ public class MainActivity extends AppCompatActivity {
             displayView.setText("The inventory table contains " +cursor.getCount() + "product. \n\n");
             displayView.append(InventoryEntry._ID + "-" +
             InventoryEntry.COLUMN_INVENTORY_NAME +"-"+
-            InventoryEntry.COLUMN_INVENTORY_PRICE +"-"+"\n"
-            /*InventoryEntry.COLUMN_INVENTORY_QUANTITY+"-"+
+            InventoryEntry.COLUMN_INVENTORY_PRICE +"-"+
+            InventoryEntry.COLUMN_INVENTORY_QUANTITY+"-"+
             InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME +"-"+
-            InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE + "\n" */
-            );
+            InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE + "\n" );
 
             // Figure out the index of each column
             int idColumnIndex = cursor.getColumnIndex(InventoryEntry._ID);
             int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_INVENTORY_NAME);
             int priceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_INVENTORY_PRICE);
-            /*int quantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_INVENTORY_QUANTITY);
+            int quantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_INVENTORY_QUANTITY);
             int supplierColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME);
-            int suppliePhoneColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE);
-*/
+            int supplierPhoneColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE);
+
             // Iterate through all the returned rows in the cursor
             while (cursor.moveToNext()) {
                 // Use that index to extract the String or Int value of the word
@@ -91,24 +91,20 @@ public class MainActivity extends AppCompatActivity {
                 int currentID = cursor.getInt(idColumnIndex);
                 String currentName = cursor.getString(nameColumnIndex);
                 int currentPrice = cursor.getInt(priceColumnIndex);
+                int currentQuantity = cursor.getInt(quantityColumnIndex);
+                String currentSupplierNme = cursor.getString(supplierColumnIndex);
+                String currnetSupplierPhone = cursor.getString(supplierPhoneColumnIndex);
              /*   int currentGender = cursor.getInt(quantityColumnIndex);
                 int currentWeight = cursor.getInt(supplierColumnIndex);*/
-/*
-
-                String currentQuantity = cursor.getString(quantityColumnIndex);
-                String currentSupplier = cursor.getString(supplierColumnIndex);
-                String currentSupplierPhone = cursor.getString(suppliePhoneColumnIndex);
-*/
 
 
                 // Display the values from each column of the current row in the cursor in the TextView
                 displayView.append(("\n" + currentID + " - " +
                         currentName + " - " +
-                        currentPrice
-                     /*   currentQuantity + " - " +
-                        currentSupplier + " - " +
-                        currentSupplierPhone*/
-                ));
+                        currentPrice + " - "+
+                       currentQuantity + " - " +
+                        currentSupplierNme + " - " +
+                        currnetSupplierPhone ));
             }
         } finally {
             cursor.close();
@@ -120,11 +116,11 @@ public class MainActivity extends AppCompatActivity {
                 db = mInventoryDBHelper.getWritableDatabase() ;
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_INVENTORY_NAME, "Choclate");
-        values.put(InventoryEntry.COLUMN_INVENTORY_PRICE, 13);
-      /*  values.put(InventoryEntry.COLUMN_INVENTORY_QUANTITY, "Terrier");
-        values.put(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME, "Terrier");
-        values.put(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE, "Terrier");
-*/
+        values.put(InventoryEntry.COLUMN_INVENTORY_PRICE, 5);
+      values.put(InventoryEntry.COLUMN_INVENTORY_QUANTITY, 3);
+        values.put(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME, "Kit Kat");
+        values.put(InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE, "0379656000");
+
         // Insert a new row for Toto in the database, returning the ID of that new row.
         // The first argument for db.insert() is the pets table name.
         // The second argument provides the name of a column in which the framework
@@ -142,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+    public void deletProduct(){
+        db.delete(InventoryEntry.TABLE_NAME,InventoryEntry._ID ,null);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
                 // Do nothing for now
+                deletProduct();
                 return true;
         }
         return super.onOptionsItemSelected(item);

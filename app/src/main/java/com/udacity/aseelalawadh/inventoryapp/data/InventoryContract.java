@@ -18,10 +18,10 @@ public final class InventoryContract {
         // Product Name, Price, Quantity, Supplier Name, and Supplier Phone Number.
         public final static String COLUMN_INVENTORY_NAME = "name" ;
         public final static String COLUMN_INVENTORY_PRICE = "price";
-       /* public final static String COLUMN_INVENTORY_QUANTITY = "quantity";
+        public final static String COLUMN_INVENTORY_QUANTITY = "quantity";
         public final static String COLUMN_INVENTORY_SUPPLIER_NAME = "supplier name";
         public final static String COLUMN_INVENTORY_SUPPLIER_PHONE = "supplier phone";
-*/
+
 
     }
 
