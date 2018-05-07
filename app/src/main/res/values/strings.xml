@@ -1,36 +1,17 @@
 <resources>
+
     <string name="app_name">Inventory App</string>
-    <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
-
-    <!-- Label for overflow menu option that deletes all pet data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Product</string>
-
-    <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
     <string name="editor_activity_title_new_product">Add a Product</string>
-
-    <!-- Label for editor menu option to save pet and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
-
-    <!-- Label for editor overflow menu option that deletes the current pet [CHAR LIMIT=20] -->
     <string name="action_delete">Delete</string>
-
-    <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
     <string name="category_overview">Overview</string>
-
-    <!-- Label for measurement information in the editor [CHAR LIMIT=30] -->
     <string name="category_measurement">Measurement</string>
-
-    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_product_name">Name</string>
-
-    <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
     <string name="hint_price">Price</string>
-
-    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
-    <string name="hint_quantity">Weight</string>
+    <string name="hint_quantity">Quantity</string>
     <string name="hint_supplier_name">Supplier name</string>
     <string name="hint_supplier_phone">Suppler phone number</string>
-
 
 </resources>

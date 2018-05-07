@@ -24,29 +24,17 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Create db table
-        String SQL_CREATE_INVENTORY_TABLE = "CREATE TABLE " + InventoryEntry.TABLE_NAME + "("
-                + InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + InventoryEntry.COLUMN_INVENTORY_NAME + " TEXT NOT NULL, "
-                + InventoryEntry.COLUMN_INVENTORY_PRICE + " INTEGER NOT NULL,"
-                + InventoryEntry.COLUMN_INVENTORY_QUANTITY + " INTEGER NOT NULL ,"
-                + InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME + "TEXT NOT NULL,"
-                + InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE + "TEXT NOT NULL );";
+        String SQL_CREATE_INVENTORY_TABLE = "create table " + InventoryEntry.TABLE_NAME + " " +
+                "(" + InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + InventoryEntry.COLUMN_INVENTORY_NAME + " text not null,"
+                + InventoryEntry.COLUMN_INVENTORY_PRICE + " integer not null,"
+                + InventoryEntry.COLUMN_INVENTORY_QUANTITY + " integer not null,"
+                + InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME + " text not null,"
+                + InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE + " text not null)";
         db.execSQL(SQL_CREATE_INVENTORY_TABLE);
-/*
-        +InventoryEntry._ID + "integer primary key autoincrement, "
-                +InventoryEntry.COLUMN_INVENTORY_NAME + "text not null, "
-                +InventoryEntry.COLUMN_INVENTORY_PRICE + "text not null, "
-                +InventoryEntry.COLUMN_INVENTORY_QUANTITY+"text not null, "
-                +InventoryEntry.COLUMN_INVENTORY_SUPPLIER_NAME + "text not null, "
-                +InventoryEntry.COLUMN_INVENTORY_SUPPLIER_PHONE +"text not null); ";*/
-
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-      /*  db.execSQL(" DROB TABLE IF EXIST" + InventoryEntry.TABLE_NAME);
-        onCreate(db);
-*/
     }
 }
